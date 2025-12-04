@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sheriff O. Oladimeji | Full-Stack Developer & Tech Founder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    :root {
+      --naija-green: #1B8D4D;
+      --naija-green-light: #2ECC71;
+      --naija-green-dark: #145A32;
+      --naija-white: #FFFFFF;
+      --bg-dark: #0a0f0a;
+      --bg-card: rgba(27, 141, 77, 0.08);
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(135deg, #0a0f0a 0%, #0d1a0d 50%, #0a0f0a 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .hero::before {
+      top: 10%;
+      left: 5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(27, 141, 77, 0.2), transparent);
+    }
+    
+    .hero::after {
+      bottom: 10%;
+      right: 5%;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(46, 204, 113, 0.15), transparent);
+      animation-direction: reverse;
+      animation-duration: 6s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+    
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    
+    .founder-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      color: var(--naija-green-light);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      border-radius: 30px;
+      background: rgba(27, 141, 77, 0.1);
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, var(--naija-green-light) 50%, var(--naija-green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+    
+    .hero-desc {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+    
+    .hero-desc strong { color: var(--naija-green-light); }
+    
+    .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--naija-green), var(--naija-green-dark));
+      color: #fff;
+      box-shadow: 0 4px 25px rgba(27, 141, 77, 0.4);
+    }
+    
+    .btn-primary:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 8px 35px rgba(27, 141, 77, 0.5); 
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    
+    .btn-secondary:hover { 
+      border-color: var(--naija-green-light); 
+      color: var(--naija-green-light); 
+    }
+    
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(12px); }
+    }
+    
+    /* Sections */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-dark { background: rgba(0,0,0,0.4); }
+    
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.1rem;
+    }
+    
+    /* Featured Project - TaxiNaija */
+    .taxinaija-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+    
+    @media (max-width: 900px) {
+      .taxinaija-hero { grid-template-columns: 1fr; text-align: center; }
+      .taxinaija-hero img { max-width: 300px; margin: 0 auto; }
+    }
+    
+    .taxinaija-hero img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(27, 141, 77, 0.3);
+    }
+    
+    .taxinaija-content h3 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, var(--naija-green-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    
+    .taxinaija-tagline {
+      color: var(--naija-green-light);
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+    
+    .taxinaija-mission {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+    
+    .launch-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, rgba(27, 141, 77, 0.2), rgba(46, 204, 113, 0.1));
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    
+    .launch-badge .icon { font-size: 1.5rem; }
+    .launch-badge .text { font-size: 0.9rem; color: var(--text-secondary); }
+    .launch-badge .date { font-weight: 700; color: var(--naija-green-light); font-size: 1.1rem; }
+    
+    /* Tech Stack */
+    .tech-section { margin-bottom: 3rem; }
+    .tech-label { 
+      color: #fff; 
+      margin-bottom: 1rem; 
+      font-size: 0.85rem; 
+      letter-spacing: 2px; 
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    
+    .tech-tag {
+      padding: 0.6rem 1.2rem;
+      background: rgba(27, 141, 77, 0.15);
+      border: 1px solid rgba(46, 204, 113, 0.25);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      transition: all 0.3s;
+    }
+    
+    .tech-tag:hover {
+      background: rgba(27, 141, 77, 0.25);
+      border-color: var(--naija-green-light);
+    }
+    
+    /* Apps Grid */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .app-card {
+      background: linear-gradient(135deg, rgba(27, 141, 77, 0.1), rgba(0,0,0,0.3));
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(46, 204, 113, 0.15);
+      transition: all 0.3s;
+    }
+    
+    .app-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(46, 204, 113, 0.4);
+      box-shadow: 0 15px 40px rgba(27, 141, 77, 0.2);
+    }
+    
+    .app-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .app-card h4 { color: var(--naija-green-light); margin-bottom: 0.75rem; font-size: 1.25rem; }
+    .app-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+    .app-card .status {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.3rem 0.8rem;
+      background: rgba(46, 204, 113, 0.2);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--naija-green-light);
+      font-weight: 600;
+    }
+    
+    /* Problem/Solution */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .problem-card {
+      background: rgba(0,0,0,0.3);
+      padding: 2rem;
+      border-radius: 16px;
+      border-left: 4px solid var(--naija-green);
+    }
+    
+    .problem-card h4 { 
+      color: var(--naija-green-light); 
+      margin-bottom: 1rem; 
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .problem-card ul { list-style: none; }
+    .problem-card li { 
+      color: var(--text-secondary); 
+      padding: 0.4rem 0; 
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .problem-card li::before { content: '→'; color: var(--naija-green-light); }
+    
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .skill-card {
+      background: linear-gradient(135deg, rgba(27, 141, 77, 0.08), rgba(0,0,0,0.2));
+      border-radius: 16px;
+      padding: 1.75rem;
+      border: 1px solid rgba(46, 204, 113, 0.1);
+      transition: all 0.3s;
+    }
+    
+    .skill-card:hover {
+      border-color: rgba(46, 204, 113, 0.3);
+      transform: translateY(-3px);
+    }
+    
+    .skill-card h3 {
+      color: var(--naija-green-light);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    
+    .skill-tag {
+      padding: 0.4rem 0.8rem;
+      background: rgba(27, 141, 77, 0.1);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #e2e8f0;
+    }
+    
+    /* Roadmap */
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .roadmap-card {
+      background: rgba(0,0,0,0.3);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .roadmap-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--naija-green), var(--naija-green-light));
+    }
+    
+    .roadmap-card .year {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--naija-green-light);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    
+    .roadmap-card h4 { margin-bottom: 1rem; font-size: 1.1rem; }
+    .roadmap-card ul { list-style: none; }
+    .roadmap-card li { 
+      color: var(--text-secondary); 
+      padding: 0.3rem 0; 
+      font-size: 0.9rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .roadmap-card li::before { content: '✓'; color: var(--naija-green-light); font-size: 0.8rem; }
+    
+    /* Cert Card */
+    .cert-card {
+      background: linear-gradient(135deg, rgba(27, 141, 77, 0.1), rgba(0,0,0,0.3));
+      padding: 2.5rem;
+      border-radius: 20px;
+      border: 1px solid rgba(46, 204, 113, 0.15);
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    @media (max-width: 600px) {
+      .cert-card { flex-direction: column; text-align: center; }
+    }
+    
+    .cert-icon { font-size: 4rem; }
+    .cert-info h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .cert-info .issuer { color: var(--naija-green-light); font-size: 1rem; margin-bottom: 0.75rem; }
+    .cert-skills { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+    
+    /* Contact */
+    .contact-section { text-align: center; }
+    .contact-section > p { 
+      color: var(--text-secondary); 
+      margin-bottom: 2.5rem; 
+      line-height: 1.9; 
+      max-width: 550px; 
+      margin-left: auto; 
+      margin-right: auto;
+      font-size: 1.1rem;
+    }
+    
+    .contact-btns { 
+      display: flex; 
+      gap: 1rem; 
+      justify-content: center; 
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    
+    .contact-btn {
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .contact-btn.email {
+      background: linear-gradient(135deg, var(--naija-green), var(--naija-green-dark));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(27, 141, 77, 0.3);
+    }
+    
+    .contact-btn.social {
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    
+    .contact-btn:hover { transform: translateY(-3px); }
+    .contact-btn.email:hover { box-shadow: 0 8px 30px rgba(27, 141, 77, 0.4); }
+    .contact-btn.social:hover { border-color: var(--naija-green-light); color: var(--naija-green-light); }
+    
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    
+    .contact-info span { display: flex; align-items: center; gap: 0.5rem; }
+    
+    /* Footer */
+    footer {
+      padding: 2.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(46, 204, 113, 0.1);
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+    
+    footer .flag { font-size: 1.2rem; margin: 0 0.25rem; }
+    
+    @media (max-width: 768px) {
+      section { padding: 4rem 1.5rem; }
+      h2 { font-size: 2rem; }
+      .taxinaija-content h3 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="founder-badge">🚀 Tech Founder & Full-Stack Developer</span>
+      <h1>Sheriff O. Oladimeji</h1>
+      <p class="hero-desc">Building <strong>TaxiNaija</strong> — Nigeria's homegrown ride-sharing platform. Full-stack developer specializing in Flutter, React, and Firebase. Based in Charlotte, NC.</p>
+      <div class="btn-group">
+        <a href="#taxinaija" class="btn btn-primary">🚗 See TaxiNaija</a>
+        <a href="#contact" class="btn btn-secondary">📬 Get In Touch</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2ECC71" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- TaxiNaija Featured Project -->
+  <section id="taxinaija" class="section-dark">
+    <div class="container">
+      <div class="taxinaija-hero">
+        <img src="taxinaija-logo.png" alt="TaxiNaija - Nigerian Ride-Sharing App">
+        <div class="taxinaija-content">
+          <h3>TaxiNaija</h3>
+          <p class="taxinaija-tagline">Built by Nigerians, for Nigerians 🇳🇬</p>
+          <p class="taxinaija-mission">A modern, reliable, and affordable ride-hailing platform designed to keep economic value within Nigeria. We're solving the problems that international competitors ignore — high surge prices, unfair driver commissions, and apps not built for Nigerian roads.</p>
+          <div class="launch-badge">
+            <span class="icon">🎯</span>
+            <div>
+              <span class="text">Official Launch</span><br>
+              <span class="date">January 10, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tech Stack -->
+      <div class="tech-section">
+        <p class="tech-label">Technology Stack</p>
+        <div class="tech-stack">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Dart</span>
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Firebase</span>
+          <span class="tech-tag">Firestore</span>
+          <span class="tech-tag">Stripe</span>
+          <span class="tech-tag">Mapbox SDK</span>
+          <span class="tech-tag">Leaflet.js</span>
+          <span class="tech-tag">Cloud Functions</span>
+        </div>
+      </div>
+      
+      <!-- Three Apps -->
+      <div class="apps-grid">
+        <div class="app-card">
+          <div class="icon">📱</div>
+          <h4>Rider App</h4>
+          <p>Real-time ride matching, transparent pricing, wallet + cash + bank payments, driver tracking, and safety features. Optimized for low-to-mid range devices common in Nigeria.</p>
+          <span class="status">99% Complete</span>
+        </div>
+        <div class="app-card">
+          <div class="icon">🚗</div>
+          <h4>Driver App</h4>
+          <p>Fast ride matching for more trips per day, clear earnings breakdown, instant withdrawals, traffic-sensitive navigation, and driver safety alerts. Fair 85% driver payout.</p>
+          <span class="status">99% Complete</span>
+        </div>
+        <div class="app-card">
+          <div class="icon">💻</div>
+          <h4>Admin Dashboard</h4>
+          <p>Interactive maps with Leaflet, revenue analytics, driver management, support ticket system, regulatory compliance tools, and multi-format data exports.</p>
+          <span class="status">Production Ready</span>
+        </div>
+      </div>
+      
+      <!-- Problems We Solve -->
+      <h2 style="margin-bottom: 2rem;">The Problem We're Solving</h2>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <h4>😤 For Riders</h4>
+          <ul>
+            <li>High surge prices from foreign apps</li>
+            <li>Unreliable wait times</li>
+            <li>Poor customer experience</li>
+            <li>Apps not optimized for Nigeria's roads</li>
+          </ul>
+        </div>
+        <div class="problem-card">
+          <h4>😓 For Drivers</h4>
+          <ul>
+            <li>Low earnings after high commissions</li>
+            <li>Delayed payouts</li>
+            <li>Difficult customer support</li>
+            <li>Policies not tailored to Nigerian realities</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Roadmap -->
+      <h2 style="margin-bottom: 2rem;">Roadmap & Vision</h2>
+      <div class="roadmap">
+        <div class="roadmap-card">
+          <div class="year">2025–2026</div>
+          <h4>Launch Phase</h4>
+          <ul>
+            <li>Launch Android + iOS apps</li>
+            <li>Lagos, Abuja, Ibadan, Port Harcourt</li>
+            <li>Complete CAC licensing</li>
+            <li>Onboard strategic investors</li>
+          </ul>
+        </div>
+        <div class="roadmap-card">
+          <div class="year">2026–2027</div>
+          <h4>Growth Phase</h4>
+          <ul>
+            <li>TaxiNaija Business (corporate)</li>
+            <li>Delivery & logistics expansion</li>
+            <li>In-app TaxiNaija Wallet</li>
+            <li>Vehicle financing partnerships</li>
+          </ul>
+        </div>
+        <div class="roadmap-card">
+          <div class="year">2027–2030</div>
+          <h4>Expansion Phase</h4>
+          <ul>
+            <li>Full mobility ecosystem</li>
+            <li>African expansion (Ghana, Kenya, SA)</li>
+            <li>Transportation data platform</li>
+            <li>TaxiNaija Auto — EV transition</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section>
+    <div class="container">
+      <h2>Technical Skills</h2>
+      <p class="section-subtitle">The full stack I use to build production-grade applications</p>
+      
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Mobile</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Flutter</span>
+            <span class="skill-tag">Dart</span>
+            <span class="skill-tag">iOS</span>
+            <span class="skill-tag">Android</span>
+            <span class="skill-tag">Mapbox</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Frontend</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Tailwind</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Backend</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Firebase</span>
+            <span class="skill-tag">Firestore</span>
+            <span class="skill-tag">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Payments</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Stripe</span>
+            <span class="skill-tag">Wallets</span>
+            <span class="skill-tag">Commissions</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Security</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Auth Systems</span>
+            <span class="skill-tag">Firebase Rules</span>
+            <span class="skill-tag">API Security</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="section-dark">
+    <div class="container">
+      <h2>Certifications</h2>
+      <p class="section-subtitle">Professional credentials</p>
+      
+      <div class="cert-card">
+        <span class="cert-icon">🔐</span>
+        <div class="cert-info">
+          <h3>Google Cybersecurity Professional Certificate</h3>
+          <p class="issuer">Google / Coursera • 2024</p>
+          <p class="cert-skills">Security frameworks • Network security • Linux administration • SQL • Python automation • Incident response</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2>Let's Connect</h2>
+      <p>I'm based in Charlotte, NC and open to opportunities in software development, mobile development, and full-stack engineering. Whether you want to discuss tech, opportunities, or TaxiNaija — I'd love to hear from you.</p>
+      
+      <div class="contact-btns">
+        <a href="mailto:isholaibadan2701@gmail.com" class="contact-btn email">📧 Email Me</a>
+        <a href="https://www.linkedin.com/in/sheriff-o-oladimeji-8907a51a4" target="_blank" class="contact-btn social">💼 LinkedIn</a>
+      </div>
+      
+      <div class="contact-info">
+        <span>📍 Charlotte, NC</span>
+        <span>📞 (913) 972-4917</span>
+        <span>✉️ isholaibadan2701@gmail.com</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2024 Sheriff O. Oladimeji • Full-Stack Developer & Founder</p>
+    <p style="margin-top: 0.5rem;">Building the future of Nigerian mobility <span class="flag">🇳🇬</span></p>
+  </footer>
+</body>
+</html>

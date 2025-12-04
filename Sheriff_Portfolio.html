@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sheriff O. Oladimeji | Founder • Developer • Creative Technologist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --naija-green: #228B22;
+      --naija-green-light: #2ECC40;
+      --naija-green-dark: #1a6b1a;
+      --naija-white: #ffffff;
+      --dark-bg: #0a0f0a;
+      --dark-card: #111611;
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --accent: #2ECC40;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+    
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 2rem;
+      background: rgba(10, 15, 10, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(34, 139, 34, 0.2);
+    }
+    
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--naija-green);
+    }
+    
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(34, 139, 34, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(46, 204, 64, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: rgba(34, 139, 34, 0.2);
+      border: 1px solid var(--naija-green);
+      border-radius: 30px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--naija-green) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      max-width: 500px;
+    }
+    
+    .hero-desc {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+    
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    
+    .btn {
+      padding: 0.875rem 1.75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--naija-green), var(--naija-green-dark));
+      color: white;
+      box-shadow: 0 4px 20px rgba(34, 139, 34, 0.4);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(34, 139, 34, 0.5);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--naija-green);
+      color: var(--accent);
+    }
+    
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .phone-mockup {
+      max-width: 320px;
+      border-radius: 40px;
+      box-shadow: 
+        0 25px 50px rgba(0,0,0,0.5),
+        0 0 100px rgba(34, 139, 34, 0.2);
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    /* Section Styles */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .section-header p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .section-dark { background: var(--dark-card); }
+    
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .skill-card {
+      background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), rgba(34, 139, 34, 0.02));
+      border: 1px solid rgba(34, 139, 34, 0.2);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: all 0.3s;
+    }
+    
+    .skill-card:hover {
+      border-color: var(--naija-green);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(34, 139, 34, 0.15);
+    }
+    
+    .skill-card h3 {
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    
+    .skill-tag {
+      padding: 0.4rem 0.75rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    
+    /* TaxiNaija Feature Section */
+    .taxinaija-section {
+      background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-card) 50%, var(--dark-bg) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .taxinaija-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--naija-green), transparent);
+    }
+    
+    .taxinaija-card {
+      background: linear-gradient(135deg, rgba(34, 139, 34, 0.15), rgba(17, 22, 17, 0.9));
+      border: 1px solid rgba(34, 139, 34, 0.3);
+      border-radius: 24px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .taxinaija-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(34, 139, 34, 0.2), transparent);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    
+    .project-badge {
+      display: inline-block;
+      background: var(--naija-green);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .taxinaija-card h3 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      color: var(--naija-white);
+    }
+    
+    .taxinaija-card h3 span { color: var(--accent); }
+    
+    .project-role {
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .mission-box {
+      background: rgba(0,0,0,0.3);
+      border-left: 4px solid var(--naija-green);
+      padding: 1.5rem;
+      border-radius: 0 12px 12px 0;
+      margin: 2rem 0;
+    }
+    
+    .mission-box h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    
+    .mission-box p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    
+    .tech-stack {
+      margin: 2rem 0;
+    }
+    
+    .tech-stack h4 {
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    
+    .tech-tag {
+      padding: 0.5rem 1rem;
+      background: rgba(34, 139, 34, 0.2);
+      border: 1px solid rgba(34, 139, 34, 0.4);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+    
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .app-card {
+      background: rgba(0,0,0,0.4);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+    }
+    
+    .app-card .icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .app-card h5 {
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .app-card p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    
+    .app-card .status {
+      display: inline-block;
+      background: rgba(46, 204, 64, 0.2);
+      color: var(--accent);
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+    }
+    
+    .feature-item .check {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+    
+    .feature-item span {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    
+    .launch-banner {
+      background: linear-gradient(135deg, var(--naija-green), var(--naija-green-dark));
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .launch-banner h4 {
+      color: white;
+      font-size: 1.1rem;
+    }
+    
+    .launch-banner .date {
+      background: white;
+      color: var(--naija-green-dark);
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+    
+    /* BlackBridge Section */
+    .blackbridge-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(17, 22, 17, 0.9));
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin-top: 3rem;
+    }
+    
+    .blackbridge-card h3 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .blackbridge-card h3 span { color: #a78bfa; }
+    
+    .blackbridge-card .role {
+      color: #a78bfa;
+      margin-bottom: 1.5rem;
+    }
+    
+    .blackbridge-card p {
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .genre-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    
+    .genre-tag {
+      padding: 0.4rem 1rem;
+      background: rgba(139, 92, 246, 0.2);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #c4b5fd;
+    }
+    
+    /* Certifications */
+    .cert-card {
+      background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), transparent);
+      border: 1px solid rgba(34, 139, 34, 0.2);
+      padding: 2rem;
+      border-radius: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .cert-icon { font-size: 3rem; margin-bottom: 1rem; }
+    
+    .cert-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .cert-card .issuer {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    
+    .cert-skills {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      text-align: center;
+      position: relative;
+    }
+    
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(34, 139, 34, 0.1), transparent);
+      pointer-events: none;
+    }
+    
+    .contact-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .contact-info {
+      margin: 2rem 0;
+      color: var(--text-secondary);
+    }
+    
+    .contact-info p { margin-bottom: 0.5rem; }
+    .contact-info a { color: var(--accent); text-decoration: none; }
+    
+    .contact-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(34, 139, 34, 0.2);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    footer span { color: var(--accent); }
+    
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .hero-subtitle, .hero-desc { margin-left: auto; margin-right: auto; }
+      .hero-btns { justify-content: center; }
+      .hero-image { order: -1; margin-bottom: 2rem; }
+      .phone-mockup { max-width: 250px; }
+      
+      .nav-links { display: none; }
+      
+      section { padding: 4rem 1.5rem; }
+      .taxinaija-card, .blackbridge-card { padding: 2rem; }
+      .taxinaija-card h3 { font-size: 2rem; }
+      
+      .launch-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">S.O.</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="about">
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="hero-badge">🇳🇬 BUILDING FOR NIGERIA</span>
+        <h1>Sheriff O. <span>Oladimeji</span></h1>
+        <p class="hero-subtitle">Founder • Lead Developer • Creative Technologist</p>
+        <p class="hero-desc">Multi-disciplinary technologist building production-grade mobile & web applications. Founder of TaxiNaija — Nigeria's homegrown ride-sharing platform launching January 2026.</p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn btn-primary">🚀 View TaxiNaija</a>
+          <a href="#contact" class="btn btn-secondary">📧 Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="taxinaija-mockup.png" alt="TaxiNaija App Mockup" class="phone-mockup">
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section-dark" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <h2>Technical Arsenal</h2>
+        <p>From mobile apps to AI automation — the tools I use to build, create, and innovate</p>
+      </div>
+      
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>📱 Mobile Development</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Flutter</span>
+            <span class="skill-tag">Dart</span>
+            <span class="skill-tag">React Native</span>
+            <span class="skill-tag">Kotlin KMP</span>
+            <span class="skill-tag">Android Studio</span>
+            <span class="skill-tag">Xcode</span>
+          </div>
+        </div>
+        
+        <div class="skill-card">
+          <h3>💻 Frontend Development</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">HTML/CSS</span>
+            <span class="skill-tag">Tailwind</span>
+          </div>
+        </div>
+        
+        <div class="skill-card">
+          <h3>⚙️ Backend & Database</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Firebase</span>
+            <span class="skill-tag">Firestore</span>
+            <span class="skill-tag">Cloud Functions</span>
+            <span class="skill-tag">REST APIs</span>
+          </div>
+        </div>
+        
+        <div class="skill-card">
+          <h3>💳 Payments Integration</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Stripe</span>
+            <span class="skill-tag">Paystack</span>
+            <span class="skill-tag">Flutterwave</span>
+            <span class="skill-tag">Wallet Systems</span>
+          </div>
+        </div>
+        
+        <div class="skill-card">
+          <h3>🤖 AI & Automation</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Prompt Engineering</span>
+            <span class="skill-tag">AI Music Gen</span>
+            <span class="skill-tag">ChatGPT</span>
+            <span class="skill-tag">Claude</span>
+            <span class="skill-tag">RunwayML</span>
+          </div>
+        </div>
+        
+        <div class="skill-card">
+          <h3>🎨 Design & Branding</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Canva Pro</span>
+            <span class="skill-tag">UI/UX</span>
+            <span class="skill-tag">App Mockups</span>
+            <span class="skill-tag">Brand Identity</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TaxiNaija Section -->
+  <section class="taxinaija-section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Project</h2>
+        <p>A production-ready ride-sharing platform built from the ground up for Nigeria</p>
+      </div>
+      
+      <div class="taxinaija-card">
+        <span class="project-badge">🇳🇬 FULL-STACK APPLICATION</span>
+        <h3>Taxi<span>Naija</span></h3>
+        <p class="project-role">Founder & Lead Developer</p>
+        
+        <div class="mission-box">
+          <h4>🎯 MISSION</h4>
+          <p>Redefine transportation for Nigerians by building a modern, reliable, and affordable ride-hailing system created by Nigerians, for Nigerians. Our platform keeps economic value inside the country while empowering both riders and drivers with fair pricing and better earnings.</p>
+        </div>
+        
+        <div class="mission-box">
+          <h4>🔭 VISION</h4>
+          <p>Become Nigeria's most trusted ride-sharing platform — expanding from ride-hailing into logistics, payments, and smart transport solutions across Africa by 2030.</p>
+        </div>
+        
+        <div class="tech-stack">
+          <h4>TECH STACK</h4>
+          <div class="tech-tags">
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Stripe</span>
+            <span class="tech-tag">Mapbox</span>
+            <span class="tech-tag">Leaflet</span>
+          </div>
+        </div>
+        
+        <div class="apps-grid">
+          <div class="app-card">
+            <div class="icon">📱</div>
+            <h5>Rider App</h5>
+            <p>Book rides, track drivers, manage payments, trip history</p>
+            <span class="status">99% Complete</span>
+          </div>
+          <div class="app-card">
+            <div class="icon">🚗</div>
+            <h5>Driver App</h5>
+            <p>Accept trips, navigation, earnings, instant withdrawals</p>
+            <span class="status">99% Complete</span>
+          </div>
+          <div class="app-card">
+            <div class="icon">💻</div>
+            <h5>Admin Panel</h5>
+            <p>Analytics, user management, revenue tracking, exports</p>
+            <span class="status">Complete</span>
+          </div>
+        </div>
+        
+        <h4 style="margin-top: 2rem; margin-bottom: 1rem; font-size: 0.9rem; letter-spacing: 1px;">KEY FEATURES</h4>
+        <div class="features-list">
+          <div class="feature-item"><span class="check">✓</span><span>Real-time GPS tracking with turn-by-turn navigation</span></div>
+          <div class="feature-item"><span class="check">✓</span><span>Nigeria-optimized routing and fare calculation</span></div>
+          <div class="feature-item"><span class="check">✓</span><span>Complete Stripe payment integration</span></div>
+          <div class="feature-item"><span class="check">✓</span><span>Wallet system with 85/15 commission splits</span></div>
+          <div class="feature-item"><span class="check">✓</span><span>Cash + card + bank transfer payments</span></div>
+          <div class="feature-item"><span class="check">✓</span><span>Driver and rider rating systems</span></div>
+          <div class="feature-item"><span class="check">✓</span><span>Support ticket management</span></div>
+          <div class="feature-item"><span class="check">✓</span><span>Regulatory permits secured</span></div>
+        </div>
+        
+        <div class="launch-banner">
+          <h4>🚀 PUBLIC LAUNCH DATE</h4>
+          <span class="date">January 10, 2026</span>
+        </div>
+      </div>
+      
+      <!-- BlackBridge -->
+      <div class="blackbridge-card">
+        <span class="project-badge" style="background: #8b5cf6;">🎵 CREATIVE VENTURE</span>
+        <h3>Black<span>Bridge</span> Entertainment</h3>
+        <p class="role">Co-Founder & Creative Director</p>
+        <p>Pioneering AI-assisted music production — generating original melodies, instrumentals, and full songs for recording artists across Europe, Africa, and the United States. One of the early innovators in AI-driven creative production for the independent music space.</p>
+        <div class="genre-tags">
+          <span class="genre-tag">Afrobeat</span>
+          <span class="genre-tag">R&B</span>
+          <span class="genre-tag">Pop</span>
+          <span class="genre-tag">Trap</span>
+          <span class="genre-tag">AI Composition</span>
+          <span class="genre-tag">Music Videos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>Certifications</h2>
+        <p>Professional credentials and continuous learning</p>
+      </div>
+      
+      <div class="cert-card">
+        <div class="cert-icon">🔐</div>
+        <h3>Google Cybersecurity Professional Certificate</h3>
+        <p class="issuer">Google / Coursera • 2024</p>
+        <p class="cert-skills">Security frameworks • Network security • Linux • SQL • Python automation • Incident response</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="contact-content">
+        <div class="section-header">
+          <h2>Let's Build Something</h2>
+          <p>Based in Charlotte, NC — open to opportunities, collaborations, and conversations</p>
+        </div>
+        
+        <div class="contact-info">
+          <p>📍 Charlotte, North Carolina</p>
+          <p>📧 <a href="mailto:isholaibadan2701@gmail.com">isholaibadan2701@gmail.com</a></p>
+          <p>📱 (913) 972-4917</p>
+        </div>
+        
+        <div class="contact-btns">
+          <a href="mailto:isholaibadan2701@gmail.com" class="btn btn-primary">📧 Email Me</a>
+          <a href="https://www.linkedin.com/in/sheriff-o-oladimeji-8907a51a4" target="_blank" class="btn btn-secondary">💼 LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2024 <span>Sheriff O. Oladimeji</span> • Founder • Developer • Creator</p>
+  </footer>
+</body>
+</html>
